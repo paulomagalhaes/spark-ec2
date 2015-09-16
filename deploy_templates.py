@@ -78,6 +78,8 @@ template_vars = {
   "system_ram_mb": "%d" % system_ram_mb,
   "aws_access_key_id": os.getenv("AWS_ACCESS_KEY_ID"),
   "aws_secret_access_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+  "metastore_user": os.getenv("METASTORE_USER"),
+  "metastore_passwd": os.getenv("METASTORE_PASSWD"),
 }
 
 template_dir="/root/spark-ec2/templates"

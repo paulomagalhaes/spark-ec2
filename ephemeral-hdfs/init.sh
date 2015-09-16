@@ -18,16 +18,16 @@ case "$HADOOP_MAJOR_VERSION" in
     cp /root/hadoop-native/* /root/ephemeral-hdfs/lib/native/
     ;;
   2) 
-    wget http://s3.amazonaws.com/spark-related-packages/hadoop-2.0.0-cdh4.2.0.tar.gz  
+    wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
     echo "Unpacking Hadoop"
     tar xvzf hadoop-*.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
-    mv hadoop-2.0.0-cdh4.2.0/ ephemeral-hdfs/
+    mv hadoop-2.6.0-cdh5.4.2/ ephemeral-hdfs/
 
     # Have single conf dir
     rm -rf /root/ephemeral-hdfs/etc/hadoop/
     ln -s /root/ephemeral-hdfs/conf /root/ephemeral-hdfs/etc/hadoop
-    cp /root/hadoop-native/* /root/ephemeral-hdfs/lib/native/
+    cp /root/hadoop-native-2.6/* ephemeral-hdfs/lib/native/
     ;;
   yarn)
     wget http://s3.amazonaws.com/spark-related-packages/hadoop-2.4.0.tar.gz

@@ -24,3 +24,4 @@ wait
 # Post-package installation : Symlink /var/lib/ganglia/rrds to /mnt/ganglia/rrds
 rmdir /var/lib/ganglia/rrds
 ln -s /mnt/ganglia/rrds /var/lib/ganglia/rrds
+chown -R nobody:nobody /var/lib/ganglia/rrds

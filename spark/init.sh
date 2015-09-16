@@ -142,6 +142,7 @@ else
   tar xvzf spark-*.tgz > /tmp/spark-ec2_spark.log
   rm spark-*.tgz
   mv `ls -d spark-* | grep -v ec2` spark
+  ln -s /root/spark /opt/spark
 fi
 
 popd > /dev/null

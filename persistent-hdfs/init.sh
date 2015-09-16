@@ -14,10 +14,10 @@ case "$HADOOP_MAJOR_VERSION" in
     tar xvzf hadoop-1.0.4.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
     mv hadoop-1.0.4/ persistent-hdfs/
-    cp /root/hadoop-native/* /root/persistent-hdfs/lib/native/
+    cp /root/hadoop-native-2.6/* /root/persistent-hdfs/lib/native/
     ;;
   2)
-    wget http://s3.amazonaws.com/spark-related-packages/hadoop-2.0.0-cdh4.2.0.tar.gz
+    wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.0.0-cdh4.2.0.aws.tar.gz
     echo "Unpacking Hadoop"
     tar xvzf hadoop-*.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
