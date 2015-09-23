@@ -3,3 +3,4 @@ echo "Unpacking Nutch"
 tar xvzf apache-nutch-*.tar.gz > /tmp/nutch_spark.log
 rm apache-nutch-*.tar.gz
 mv apache-nutch-* nutch
+cp ephemeral-hdfs/conf/* nutch/conf
