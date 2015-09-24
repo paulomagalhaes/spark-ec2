@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# workaround image with garbage in the /tmp folder
+rm -rf /tmp/hadoop-*
+
 sudo yum install -y -q pssh
 
 # usage: echo_time_diff name start_time end_time

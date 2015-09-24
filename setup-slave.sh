@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# workaround image with garbage in the /tmp folder
+rm -rf /tmp/hadoop-*
+
 # Disable Transparent Huge Pages (THP)
 # THP can result in system thrashing (high sys usage) due to frequent defrags of memory.
 # Most systems recommends turning THP off.
