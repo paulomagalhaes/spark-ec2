@@ -69,6 +69,10 @@ tar xvzf hadoop-2.6.0-src.tar.gz
 cd hadoop-2.6.0-src
 mvn package -Pdist,native -DskipTests -Dtar
 sudo mv hadoop-dist/target/hadoop-2.6.0/lib/native/* /root/hadoop-native
+cd ..
+rm -f hadoop-2.6.0-src.tar.gz
+rm -rf hadoop-2.6.0-src
+rm apache-maven-3.2.3-bin.tar.gz
 
 # Install Snappy lib (for Hadoop)
 yum install -y snappy
