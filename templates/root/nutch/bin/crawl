@@ -25,8 +25,7 @@
 # 
 # UNLIKE THE NUTCH ALL-IN-ONE-CRAWL COMMAND THIS SCRIPT DOES THE LINK INVERSION AND 
 # INDEXING FOR EACH SEGMENT
-. ../conf/hadoop-env.sh
-PATH=$PATH:$HADOOP_HOME/bin
+
 
 INDEXFLAG=false
 JAVA_PROPERTIES=""
@@ -86,6 +85,9 @@ numThreads=50
 
 bin="`dirname "$0"`"
 bin="`cd "$bin"; pwd`"
+
+. "${bin}"/../conf/hadoop-env.sh
+PATH=$PATH:$HADOOP_HOME/bin
 
 # determines whether mode based on presence of job file
 mode=local
