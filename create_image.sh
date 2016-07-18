@@ -11,12 +11,12 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Dev tools
-sudo yum install -y java-1.7.0-openjdk-devel gcc gcc-c++ ant git
+sudo yum install -y java-1.8.0-openjdk-devel gcc gcc-c++ ant git
 # Perf tools
 sudo yum install -y dstat iotop strace sysstat htop perf
 sudo debuginfo-install -q -y glibc
 sudo debuginfo-install -q -y kernel
-sudo yum --enablerepo='*-debug*' install -q -y java-1.7.0-openjdk-debuginfo.x86_64
+sudo yum --enablerepo='*-debug*' install -q -y java-1.8.0-openjdk-debuginfo.x86_64
 
 # PySpark and MLlib deps
 sudo yum install -y  python-matplotlib python-tornado scipy libgfortran
@@ -54,7 +54,7 @@ mv apache-maven-3.2.3 /opt/
 
 # Edit bash profile
 echo "export PS1=\"\\u@\\h \\W]\\$ \"" >> ~/.bash_profile
-echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0" >> ~/.bash_profile
+echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0" >> ~/.bash_profile
 echo "export M2_HOME=/opt/apache-maven-3.2.3" >> ~/.bash_profile
 echo "export PATH=\$PATH:\$M2_HOME/bin" >> ~/.bash_profile
 
@@ -67,7 +67,7 @@ sudo yum install -y protobuf-compiler cmake openssl-devel
 wget "http://archive.apache.org/dist/hadoop/common/hadoop-2.6.0/hadoop-2.6.0-src.tar.gz"
 tar xvzf hadoop-2.6.0-src.tar.gz
 cd hadoop-2.6.0-src
-mvn package -Pdist,native -DskipTests -Dtar
+mvn package -Pdist,native -DskipTests -Dtar -Dmaven.javadoc.skip=true
 sudo mv hadoop-dist/target/hadoop-2.6.0/lib/native/* /root/hadoop-native
 cd ..
 rm -f hadoop-2.6.0-src.tar.gz
@@ -85,3 +85,11 @@ echo '#!/bin/bash' > /usr/bin/realpath
 echo 'readlink -e "$@"' >> /usr/bin/realpath
 chmod a+x /usr/bin/realpath
 mv /root/hadoop-native /root/hadoop-native-2.6
+
+yum -y install mysql-server
+/sbin/chkconfig mysqld off
+
+wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz
+wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
+wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-1.6.2-bin-2.6.0-cdh5.4.2.tgz
+
