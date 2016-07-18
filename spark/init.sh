@@ -127,8 +127,10 @@ else
     *)
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop1.tgz
-      elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then
-        wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
+      elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then      
+        if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz" ]]; then 
+          wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
+        fi
         wget -O hive-schema-mysql.sql https://s3-us-west-2.amazonaws.com/uberdata-public/hive/scripts/mysql/hive-schema-0.13.0.mysql.sql
       else
         wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop2.4.tgz
@@ -145,24 +147,12 @@ else
   mv `ls -d spark-* | grep -v ec2` spark
   echo "Setting up hive metastore"
   # install mysql jdbc driver in spark/lib
-  wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz
+  if [[ ! -e "mysql-connector-java-5.1.34.tar.gz" ]]; then
+    wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz
+  fi
   tar -xzvf mysql-connector-java-5.1.34.tar.gz mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar
-  #install mysql server 
+  #install mysql server connector
   cp mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar  spark/lib
-  yum -y install mysql-server
-  /sbin/chkconfig mysqld on
-  service mysqld start
-  SCRIPT="CREATE DATABASE metastore;USE metastore;SOURCE hive-schema-mysql.sql;"
-  SCRIPT=$SCRIPT"CREATE USER '"$METASTORE_USER"' IDENTIFIED BY '"$METASTORE_PASSWD"';"
-  SCRIPT=$SCRIPT"REVOKE ALL PRIVILEGES, GRANT OPTION FROM '"$METASTORE_USER"';"
-  SCRIPT=$SCRIPT"GRANT SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE ON metastore.* TO '"$METASTORE_USER"';"
-  SCRIPT=$SCRIPT"CREATE USER '"$METASTORE_USER"'@'localhost' IDENTIFIED BY '"$METASTORE_PASSWD"';"
-  SCRIPT=$SCRIPT"REVOKE ALL PRIVILEGES, GRANT OPTION FROM '"$METASTORE_USER"'@'localhost';"
-  SCRIPT=$SCRIPT"GRANT SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE ON metastore.* TO '"$METASTORE_USER"'@'localhost';"
-  SCRIPT=$SCRIPT"FLUSH PRIVILEGES;"
-  echo $SCRIPT
-  mysql -u root  -e "$SCRIPT"
-
 
   ln -s /root/spark /opt/spark
 fi

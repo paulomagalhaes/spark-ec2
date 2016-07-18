@@ -17,8 +17,10 @@ case "$HADOOP_MAJOR_VERSION" in
     sed -i 's/-jvm server/-server/g' /root/ephemeral-hdfs/bin/hadoop
     cp /root/hadoop-native/* /root/ephemeral-hdfs/lib/native/
     ;;
-  2) 
-    wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
+  2)
+    if [[ ! -e "hadoop-2.6.0-cdh5.4.2.tar.gz" ]]; then  
+      wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
+    fi
     echo "Unpacking Hadoop"
     tar xvzf hadoop-*.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
