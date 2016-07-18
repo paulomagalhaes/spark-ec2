@@ -22,7 +22,7 @@ case "$HADOOP_MAJOR_VERSION" in
       wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
     fi
     echo "Unpacking Hadoop"
-    tar xvzf hadoop-*.tar.gz > /tmp/spark-ec2_hadoop.log
+    tar xvzf hadoop-2.6.0-cdh5.4.2.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
     mv hadoop-2.6.0-cdh5.4.2/ ephemeral-hdfs/
 
@@ -34,7 +34,7 @@ case "$HADOOP_MAJOR_VERSION" in
   yarn)
     wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0.tar.gz
     echo "Unpacking Hadoop"
-    tar xvzf hadoop-*.tar.gz > /tmp/spark-ec2_hadoop.log
+    tar xvzf hadoop-2.6.0.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
     mv hadoop-2.6.0/ ephemeral-hdfs/
 

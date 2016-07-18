@@ -26,6 +26,7 @@ then
 else 
   case "$SPARK_VERSION" in
     0.7.3)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.7.3-prebuilt-hadoop1.tgz
       else
@@ -33,6 +34,7 @@ else
       fi
       ;;    
     0.8.0)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.8.0-incubating-bin-hadoop1.tgz
       else
@@ -40,6 +42,7 @@ else
       fi
       ;;    
     0.8.1)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.8.1-incubating-bin-hadoop1.tgz
       else
@@ -47,6 +50,7 @@ else
       fi
       ;;    
     0.9.0)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.9.0-incubating-bin-hadoop1.tgz
       else
@@ -54,6 +58,7 @@ else
       fi
       ;;
     0.9.1)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.9.1-bin-hadoop1.tgz
       else
@@ -61,6 +66,7 @@ else
       fi
       ;;
     0.9.2)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-0.9.2-bin-hadoop1.tgz
       else
@@ -68,6 +74,7 @@ else
       fi
       ;;
     1.0.0)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.0.0-bin-hadoop1.tgz
       else
@@ -75,6 +82,7 @@ else
       fi
       ;;
     1.0.1)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.0.1-bin-hadoop1.tgz
       else
@@ -82,6 +90,7 @@ else
       fi
       ;;
     1.0.2)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.0.2-bin-hadoop1.tgz
       else
@@ -89,6 +98,7 @@ else
       fi
       ;;
     1.1.0)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.1.0-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then
@@ -98,6 +108,7 @@ else
       fi
       ;;
     1.1.1)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.1.1-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then
@@ -107,6 +118,7 @@ else
       fi
       ;;
     1.2.0)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.2.0-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then
@@ -116,6 +128,7 @@ else
       fi
       ;;
     1.2.1)
+      rm -f spark-*.tgz
       if [[ "$HADOOP_MAJOR_VERSION" == "1" ]]; then
         wget http://s3.amazonaws.com/spark-related-packages/spark-1.2.1-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then
@@ -129,6 +142,7 @@ else
         wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop1.tgz
       elif [[ "$HADOOP_MAJOR_VERSION" == "2" ]]; then      
         if [[ ! -e "spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz" ]]; then 
+          rm -f spark-*.tgz
           wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-$SPARK_VERSION-bin-2.6.0-cdh5.4.2.tgz
         fi
         wget -O hive-schema-mysql.sql https://s3-us-west-2.amazonaws.com/uberdata-public/hive/scripts/mysql/hive-schema-0.13.0.mysql.sql
