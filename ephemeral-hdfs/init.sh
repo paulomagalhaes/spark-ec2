@@ -23,7 +23,7 @@ case "$HADOOP_MAJOR_VERSION" in
     fi
     echo "Unpacking Hadoop"
     tar xvzf hadoop-2.6.0-cdh5.4.2.tar.gz > /tmp/spark-ec2_hadoop.log
-    rm hadoop-*.tar.gz
+    rm -f hadoop-*.tar.gz
     mv hadoop-2.6.0-cdh5.4.2/ ephemeral-hdfs/
 
     # Have single conf dir
