@@ -1,7 +1,7 @@
 #!/bin/bash
-# Creates an AMI for the Spark EC2 scripts starting with a stock Amazon 
+# Creates an AMI for the Spark EC2 scripts starting with a stock Amazon
 # Linux AMI.
-# This has only been tested with Amazon Linux AMI 2014.03.2 
+# This has only been tested with Amazon Linux AMI 2014.03.2
 
 set -e
 
@@ -20,6 +20,10 @@ sudo yum --enablerepo='*-debug*' install -q -y java-1.8.0-openjdk-debuginfo.x86_
 
 # PySpark and MLlib deps
 sudo yum install -y  python-matplotlib python-tornado scipy libgfortran
+# Install Epel
+sudo wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install -y ./epel-release-latest-7.noarch.rpm
+sudo rm -rf epel-release-latest-7.noarch.rpm
 # SparkR deps
 sudo yum install -y R
 # Other handy tools
@@ -59,7 +63,6 @@ echo "export M2_HOME=/opt/apache-maven-3.2.3" >> ~/.bash_profile
 echo "export PATH=\$PATH:\$M2_HOME/bin" >> ~/.bash_profile
 
 source ~/.bash_profile
-
 # Build Hadoop to install native libs
 sudo mkdir /root/hadoop-native
 cd /tmp
@@ -86,10 +89,10 @@ echo 'readlink -e "$@"' >> /usr/bin/realpath
 chmod a+x /usr/bin/realpath
 mv /root/hadoop-native /root/hadoop-native-2.6
 
-yum -y install mysql-server
-/sbin/chkconfig mysqld off
+wget https://downloads.mysql.com/archives/get/file/MySQL-5.1.72-1.glibc23.x86_64.rpm-bundle.tar
+sudo yum install -y ./MySQL-*
+/sbin/chkconfig mysql off
 
 wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.34.tar.gz
 wget https://s3-us-west-2.amazonaws.com/uberdata-public/hadoop/hadoop-2.6.0-cdh5.4.2.tar.gz
-wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-1.6.2-bin-2.6.0-cdh5.4.2.tgz
-
+wget https://s3-us-west-2.amazonaws.com/uberdata-public/spark/spark-2.1.2-bin-2.6.0-cdh5.4.2.tgz
