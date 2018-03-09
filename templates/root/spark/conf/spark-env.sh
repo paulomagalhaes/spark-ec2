@@ -24,6 +24,9 @@ wget -q -O - http://169.254.169.254/latest/meta-data/local-ipv4`
 # Used for YARN model
 export YARN_CONF_DIR="/root/ephemeral-hdfs/conf"
 
+export PYSPARK_PYTHON=python3
+export PYSPARK_DRIVER_PYTHON=python3
+
 # Set a high ulimit for large shuffles, only root can do this
 if [ $(id -u) == "0" ]
 then
